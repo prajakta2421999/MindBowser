@@ -1,0 +1,147 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <i class="fa fa-home" aria-hidden="true"></i>
+      </a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Login</a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="text-reset me-3" href="#">
+        <i class="fa fa-sign-out" routerLink="/" (click)="logout()" aria-hidden="true"></i>
+      </a>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+
+<div class="container">
+  <div class="card mt-5 ">
+    <div class="card-header text-white" style="background-color: limegreen;font-size: 22px !important;">Add Employee
+      Details
+      <button class="btn" id="myBtn2" style="float: right !important;background-color: #fff;color: limegreen;"><i
+          class="fa fa-plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="card-body">
+      <div class="row form-group">
+        <div class="col-md-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th >#</th>
+                <th >First Name</th>
+                <th >Last Name</th>
+                <th >Address</th>
+                <th >Birth Date</th>
+                <th >Mobile No</th>
+                <th >City</th>
+                <th >Update</th>
+                <th >Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employee of allEmployeeList;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{employee.employeeFirstName}}</td>
+                <td>{{employee.employeeLastName}}</td>
+                <td>{{employee.employeeAddress}}</td>
+                <td>{{employee.employeeBirthdate}}</td>
+                <td>{{employee.employeeMobileNo}}</td>
+                <td>{{employee.employeeCity}}</td>
+                <td>
+                  <button class="btn text-white" (click)="deleteById(employee.employeeId)"
+                    style="background-color: limegreen;"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </td>
+                <td><button class="btn text-white" (click)="getById(employee.employeeId)" style="background-color: limegreen
+                          ;"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- model -->
+<div id="myModal2" class="modal2">
+
+  <div class="modal-content2">
+    <div class="modal-header2" style="background-color: limegreen;">
+      <span class="close m-0 pt-2 pb-2 closeModal2">&times;</span>
+      <h2 class="m-0 pt-2 pb-2">
+        Confirm
+      </h2>
+    </div>
+    <div class="modal-body2">
+      <p class="mt-3"></p>
+
+      <form [formGroup]="addEmpForm" autocomplete="off" (ngSubmit)="onSubmit()">
+
+        <hr>
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+
+              <input type="text" class="form-control" name="first_name" placeholder="First Name"
+                formControlName="employeeFirstName" [(ngModel)]="employeeModel.employeeFirstName"
+                [formGroup]="addEmpForm" [ngClass]="{ 'is-invalid': submitted && f.employeeFirstName.errors }" required>
+              <div *ngIf="submitted && f.employeeFirstName.errors"></div>
+            </div>
+            <div class="col"><input type="text" class="form-control" name="last_name" placeholder="Last Name"
+                formControlName="employeeLastName" [(ngModel)]="employeeModel.employeeLastName"
+                [formGroup]="addEmpForm" required>
+              <div *ngIf="submitted && f.employeeLastName.errors"></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="address" placeholder="Address" formControlName="employeeAddress"
+            [(ngModel)]="employeeModel.employeeAddress" [formGroup]="addEmpForm"
+            [ngClass]="{ 'is-invalid': submitted && f.employeeAddress.errors }" required>
+          </textarea>
+          <div *ngIf="submitted && f.employeeAddress.errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="date" class="form-control" name="employeeBirthdate" placeholder="Date"
+            formControlName="employeeBirthdate" [(ngModel)]="employeeModel.employeeBirthdate" [formGroup]="addEmpForm"
+            [ngClass]="{ 'is-invalid': submitted && f.employeeBirthdate.errors }" required>
+          <div *ngIf="submitted && f.employeeBirthdate.errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="employeeMobileNo" placeholder="Employee MobileNo"
+            formControlName="employeeMobileNo" [(ngModel)]="employeeModel.employeeMobileNo" [formGroup]="addEmpForm"
+            [ngClass]="{ 'is-invalid': submitted && f.employeeMobileNo.errors }" minlength="10" maxlength="10" required>
+          <div *ngIf="submitted && f.employeeMobileNo.errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="employeeCity" placeholder="Employee City"
+            formControlName="employeeCity" [(ngModel)]="employeeModel.employeeCity" [formGroup]="addEmpForm"
+            [ngClass]="{ 'is-invalid': submitted && f.employeeCity.errors }" required>
+          <div *ngIf="submitted && f.employeeCity.errors"></div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-lg closeModal2">Add</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

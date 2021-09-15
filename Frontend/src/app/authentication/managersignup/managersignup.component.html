@@ -1,0 +1,52 @@
+
+<div class="signup-form">
+    <form  [formGroup]="signUpForm" autocomplete="off" (ngSubmit)="onSubmit()">
+		<h2>Sign Up</h2>
+		<p>Please fill in this form to create an account!</p>
+		<hr>
+        <div class="form-group">
+			<div class="row">
+				<div class="col"><input type="text" class="form-control" name="first_name" placeholder="First Name" formControlName="managerFirstName"
+                    [(ngModel)]="signUpModel.managerFirstName" [formGroup]="signUpForm" [ngClass]="{ 'is-invalid': submitted && f.managerFirstName.errors }" required>
+                    <div *ngIf="submitted && f.managerFirstName.errors"></div>
+                </div>
+				<div class="col"><input type="text" class="form-control" name="last_name" placeholder="Last Name" formControlName="managerLastName"
+                    [(ngModel)]="signUpModel.managerLastName" [formGroup]="signUpForm" [ngClass]="{ 'is-invalid': submitted && f.managerLastName.errors }" required>
+                    <div *ngIf="submitted && f.managerLastName.errors"></div>
+                </div>
+			</div>        	
+        </div>
+        <div class="form-group">
+        	<input type="email" class="form-control" name="email" placeholder="Email" formControlName="managerMailAddress"
+            [(ngModel)]="signUpModel.managerMailAddress" [formGroup]="signUpForm" [ngClass]="{ 'is-invalid': submitted && f.managerMailAddress.errors }" required>
+            <div *ngIf="submitted && f.managerMailAddress.errors"></div>
+        </div>
+        <div class="form-group">
+        	<input type="date" class="form-control" name="managerBirthdate" placeholder="Date" formControlName="managerBirthdate"
+            [(ngModel)]="signUpModel.managerBirthdate" [formGroup]="signUpForm" [ngClass]="{ 'is-invalid': submitted && f.managerBirthdate.errors }" required>
+            <div *ngIf="submitted && f.managerBirthdate.errors"></div>
+        </div>
+        <div class="form-group">
+        	<input type="text" class="form-control" name="managerCompanyName" placeholder="Company Name" formControlName="managerCompanyName"
+            [(ngModel)]="signUpModel.managerCompanyName" [formGroup]="signUpForm"  [ngClass]="{ 'is-invalid': submitted && f.managerCompanyName.errors }" required>
+            <div *ngIf="submitted && f.managerCompanyName.errors"></div>
+        </div>
+		<div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" formControlName="managerPassword"
+            [(ngModel)]="signUpModel.managerPassword" [formGroup]="signUpForm"  [ngClass]="{ 'is-invalid': submitted && f.managerPassword.errors }" required>
+            <div *ngIf="submitted && f.managerPassword.errors"></div>
+        </div>
+		<div class="form-group">
+            <input type="text" class="form-control" name="address" placeholder="Address" formControlName="managerAddress"
+            [(ngModel)]="signUpModel.managerAddress" [formGroup]="signUpForm"  [ngClass]="{ 'is-invalid': submitted && f.managerAddress.errors }" required>
+            <div *ngIf="submitted && f.managerAddress.errors"></div>
+        </div>        
+        <div class="form-group">
+			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+		</div>
+		<div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+            <div class="hint-text mt-3">Already have an account? <a routerLink="/">Login here</a></div>
+        </div>
+    </form>
+</div>
